@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Event | Home Page</title>
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+    <!-- CSS Glide.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" />
+
+    <!-- Glide.js JS -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script> -->
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        get,
+        set,
+        runTransaction,
+      } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCU7s7ypbRbhw6tNRo_UpTMYrlutv6U-bA",
+        authDomain: "communityevent-3197a.firebaseapp.com",
+        databaseURL:
+          "https://communityevent-3197a-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "communityevent-3197a",
+        storageBucket: "communityevent-3197a.firebasestorage.app",
+        messagingSenderId: "116519039463",
+        appId: "1:116519039463:web:a037ee9c2c45b4b8020d42",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      // Référence vers ton compteur global
+      const likeRef = ref(db, "likes/count");
+
+      const likeBtn = document.getElementById("likeBtn");
+      const likeCount = document.getElementById("likeCount");
+
+      // Charger le compteur au démarrage
+      async function loadLikes() {
+        const snapshot = await get(likeRef);
+        if (snapshot.exists()) {
+          likeCount.textContent = snapshot.val();
+        } else {
+          await set(likeRef, 0);
+          likeCount.textContent = 0;
+        }
+      }
+
+      // Ajouter un like
+      function addLike() {
+        runTransaction(likeRef, (currentValue) => {
+          return (currentValue || 0) + 1;
+        })
+          .then(() => {
+            likeBtn.classList.add("liked");
+            setTimeout(() => likeBtn.classList.remove("liked"), 300);
+          })
+          .catch((err) => console.error("Erreur transaction :", err));
+      }
+
+      // Écoute les changements en temps réel (si d'autres like en même temps)
+      import { onValue } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+      onValue(likeRef, (snapshot) => {
+        likeCount.textContent = snapshot.val() ?? 0;
+      });
+
+      // Initialisation
+      loadLikes();
+      likeBtn.addEventListener("click", addLike);
+    </script>
+  </head>
+  <body>
+    <!-- Menu de Navigation -->
+    <nav id="navbar">
+      <div class="logo">
+        <a href="accueil.html">Community Event</a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#presentation-scroll">Présentation</a></li>
+        <li><a href="#carrousel">Jeux joués</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#footer">Footer</a></li>
+        <li>
+          <a href="#" id="dark-toggle"><i class="bx bx-moon"></i></a>
+        </li>
+      </ul>
+      <div class="hamburger">
+        <i class="bx bx-menu"></i>
+      </div>
+    </nav>
+
+    <div class="titlePremier">
+      <h1>🎉 Bienvenue dans la nouvelle saison de la Community Event ! 🎉</h1>
+      <div id="compte_a_rebours"></div>
+    </div>
+
+    <div class="like-container">
+      <p>Likez</p>
+      <button id="likeBtn" class="like-btn">❤️</button>
+      <span id="likeCount" class="like-count">0</span>
+    </div>
+
+    <!-- Section Présentation -->
+    <section class="presentation">
+      <h3>🎮 1. Esprit de l’événement</h3>
+      <br />
+      <p>
+        La Community Event est avant tout un moment chill et communautaire, sans
+        compétition ni enjeu. L’objectif est de partager, s’amuser et créer des
+        souvenirs avec d’autres streamers et spectateurs, sans pression.
+        L’événement n’a aucune visée caritative ou lucrative : chaque
+        participant gère sa chaîne et ses diffusions comme il le souhaite. Le
+        mot d’ordre reste : bienveillance, fun et authenticité.
+      </p>
+      <h3>🔥 2. Nouveauté – Le Défi du Streamer</h3>
+      <p>
+        Chaque participant peut relever un ou plusieurs défis funs pendant son
+        live (exemples : streamer en duo, jouer à un jeu inhabituel, commenter
+        en rôle, faire une session sans vocal, etc.). Les défis sont libres et
+        modulables : ils ne sont pas obligatoires, mais encouragés pour ajouter
+        un peu de fun à l’expérience. Des idées de défis seront proposées par
+        l’équipe d’organisation avant le début de l’événement. L’objectif n’est
+        pas la performance, mais le divertissement et la créativité. Les défis
+        du streamer peuvent être donné par sa communauté dans la limite du
+        raisonnable
+      </p>
+      <h3>📢 3. Streaming & Contenu</h3>
+      <p>
+        Liberté totale : chaque streamer choisit ses jeux, son ambiance et son
+        format de live. Une petite mention de l’événement (overlay, hashtag ou
+        message) est encouragée pour renforcer la visibilité commune, sans être
+        imposée. Tous les contenus doivent respecter les CGU de Twitch. Les
+        contenus à caractère toxique, discriminatoire, NSFW, ou incitant à la
+        haine sont strictement interdits et le ban sera définitif. Les clips,
+        extraits ou moments forts pourront être partagés sur les réseaux de la
+        Community Event (avec accord du streamer concerné).
+      </p>
+    </section>
+
+    <section id="grid">
+      <div class="container">
+        <h2>🚀 Pourquoi rejoindre l'aventure ?<br /></h2>
+        <p>
+          On ne force personne — si l’événement vous hype et que vous aimez les
+          bons moments, vous êtes les bienvenus. Venez comme vous êtes, relevez
+          un défi si l'envie vous prend, et partageons du fun !
+        </p>
+
+        <div class="grid-list">
+          <article class="card">
+            <div class="icon">🎧</div>
+            <h3 class="card-title">Ambiance chill & bienveillante</h3>
+            <p class="card-desc">
+              Un espace sans pression où streamer en toute tranquillité et
+              profiter d’une communauté relax.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🤝</div>
+            <h3 class="card-title">Rencontres & collaborations</h3>
+            <p class="card-desc">
+              Duos, raids, et shoutouts — une vraie opportunité pour créer des
+              liens et élargir ton audience.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🔥</div>
+            <h3 class="card-title">Défis fun & créatifs</h3>
+            <p class="card-desc">
+              Des challenges légers (facultatifs) pour surprendre et divertir
+              sans prise de tête.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📣</div>
+            <h3 class="card-title" style="width: 250px">Visibilité partagée</h3>
+            <p class="card-desc">
+              Hashtag officiel, overlays et Best Of pour mettre en lumière tes
+              meilleurs moments.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🛠️</div>
+            <h3 class="card-title">Soutien & ressources</h3>
+            <p class="card-desc">
+              Discord d’organisation, aide technique et conseils de streamers
+              pour t’accompagner.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎞️</div>
+            <h3 class="card-title">Souvenirs & contenu</h3>
+            <p class="card-desc">
+              Clips, compilations et Best Of pour alimenter ta chaîne après
+              l’event.
+            </p>
+          </article>
+        </div>
+
+        <div class="content-footer">
+          <ul>
+            <li>
+              <a class="bg-follow" href="#inscription">Rejoindre l'event</a>
+            </li>
+            <li>
+              <a href="#plus-info">En savoir plus</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carrousel des jeux joués -->
+    <!-- <section id="carrousel">
+      <h2>Jeux Joués</h2>
+      <div class="glide" id="game-carousel">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <img src="img/valorant-305kescxw5dpup7y.jpg" alt="Jeu 1" />
+              <p>Valorant</p>
+            </li>
+            <li class="glide__slide">
+              <img src="img/lol.jpg" alt="Jeu 2" />
+              <p>Leagues Of Legends</p>
+            </li>
+            <li class="glide__slide">
+              <img src="img/hearthstone.jpg" alt="Jeu 3" />
+              <p>Hearthstone</p>
+            </li>
+            <li class="glide__slide">
+              <img src="img/minecraft.jpg" alt="Jeu 4" />
+              <p>Minecraft</p>
+            </li>
+            <li class="glide__slide">
+              <img src="img/rocket leagues.jpg" alt="Jeu 5" />
+              <p>Rocket League</p>
+            </li>
+            <li class="glide__slide">
+              <img src="img/JEUX INDEPENDANTS.png" alt="Jeu 6" />
+              <p>Jeux Indépendants</p>
+            </li>
+            <li class="glide__slide">
+              <img src="img/fallguys.jpg" alt="Jeu 7" />
+              <p>Fall Guys</p>
+            </li>
+            <li class="glide__slide">
+              <img src="path/to/game8.jpg" alt="Jeu 8" />
+              <p>Jeu 8</p>
+            </li>
+            <li class="glide__slide">
+              <img src="path/to/game9.jpg" alt="Jeu 9" />
+              <p>Jeu 9</p>
+            </li>
+            <li class="glide__slide">
+              <img src="path/to/game10.jpg" alt="Jeu 10" />
+              <p>Jeu 10</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Footer avec informations obligatoires -->
+    <footer id="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Community Event. Tous droits réservés.</p>
+        <p>
+          Email :
+          <a href="mailto:community.event.off@gmail.com"
+            >community.event.off@gmail.com</a
+          >
+        </p>
+
+        <!-- Liens utiles -->
+        <div class="footer-links">
+          <a href="mentionslegales.html">Mentions Légales</a>
+          <a href="#presentation">À propos</a>
+        </div>
+
+        <!-- Réseaux sociaux avec Boxicons -->
+        <div class="social-icons">
+          <a
+            href="https://discord.gg/9SXfrCjCbu"
+            target="_self"
+            aria-label="Discord"
+            ><i class="bx bxl-discord"></i
+          ></a>
+
+          <a href="https://www.x.com" target="_blank" aria-label="Twitter"
+            ><i class="bx bxl-twitter"></i
+          ></a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            aria-label="Instagram"
+            ><i class="bx bxl-instagram"></i
+          ></a>
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=community.event.off@gmail.com"
+            target="_blank">
+            <i class="bx bx-mail-send"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script src="js/script.js"></script>
+  </body>
+</html>
