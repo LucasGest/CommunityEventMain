@@ -29,7 +29,9 @@ h4 {
 
 p,
 li,
-a {
+a,
+input,
+textarea {
   font-size: 16px;
   color: black;
   font-family: var(--font-paragraph);
@@ -162,109 +164,67 @@ body.dark-mode {
 /************************************************************* Présentation ************************************************************/
 /***************************************************************************************************************************************/
 
-.presentation {
+#presentation {
   margin: auto;
   text-align: justify;
   padding: 50px 20px;
   max-width: 1200px;
 }
 
-.presentation h1 {
+#presentation h1 {
   font-size: 56px;
   margin-top: 200px;
   text-align: center;
 }
 
-.presentation h2 {
+#presentation h2 {
   text-align: center;
   font-size: 40px;
   margin: 50px 0px;
 }
 
-.presentation h3 {
+#presentation h3 {
   font-size: 28px;
 }
 
-.presentation h3.ml {
+#presentation h3.ml {
   margin-bottom: 10px;
 }
 
-.presentation ul li {
+#presentation ul li {
   font-size: 18px;
   margin: 20px auto;
   line-height: 1.6;
   font-weight: 300;
 }
 
-.presentation p {
+#presentation p {
   font-size: 18px;
   margin: 20px auto;
   line-height: 1.6;
   font-weight: 300;
 }
 
-.presentation p strong {
+#presentation p strong {
   font-weight: 600;
 }
 
-.presentation p span {
+#presentation p span {
   font-size: 20px;
   font-weight: 500;
 }
 
-.presentation p em {
+#presentation p em {
   font-style: italic;
 }
 
-.presentation h1,
-.presentation p {
+#presentation h1,
+#presentation p {
   word-wrap: break-word;
 }
 
-.presentation p br {
+#presentation p br {
   margin-bottom: 15px;
-}
-
-/***************************************************************************************************************************************/
-/********************************************************** Carrousel Section **********************************************************/
-/***************************************************************************************************************************************/
-
-#carrousel {
-  height: 500px;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-#carrousel h2 {
-  font-size: 32px;
-  margin-bottom: 40px;
-}
-
-.glide__slide {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 250px;
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
-}
-
-.glide__slide img {
-  width: 100%;
-  border-radius: 8px;
-  object-fit: cover;
-  height: 150px; /* Ajuste la hauteur de l'image selon ton besoin */
-}
-
-.glide__slide p {
-  margin-top: 10px;
-  font-size: 16px;
-}
-
-/* Effet au survol */
-.glide__slide:hover {
-  transform: scale(1.1);
 }
 
 /***************************************************************************************************************************************/
@@ -367,6 +327,58 @@ body.dark-mode {
   padding: 10px 18px;
   border-radius: 12px;
   border: none;
+}
+
+/**************************************************************************************************************************************/
+/******************************************************* Formulaire de contact ********************************************************/
+/**************************************************************************************************************************************/
+
+#contact-form {
+  text-align: center;
+  margin: 100px auto;
+  width: 1200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#contact-form input {
+  width: 80%;
+  border: none;
+  height: 30px;
+  padding: 12px 15px;
+  border: 1.5px solid #dadada;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+  background: #fafafa;
+}
+
+#contact-form textarea {
+  width: 600px;
+  resize: none;
+  height: 200px;
+  width: 80%;
+  padding: 12px 15px;
+  border: 1.5px solid #dadada;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+  background: #fafafa;
+}
+
+#contact-form button {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background: var(--lavender);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 /**************************************************************************************************************************************/
