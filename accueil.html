@@ -8,17 +8,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 
-    <!-- CSS Glide.js -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" />
-
-    <!-- Glide.js JS -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script> -->
-
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet" />
@@ -100,10 +89,12 @@
         <a href="accueil.html">Community Event</a>
       </div>
       <ul class="nav-links">
-        <li><a href="#presentation-scroll">Présentation</a></li>
-        <li><a href="#carrousel">Jeux joués</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#footer">Footer</a></li>
+        <li><a href="#presentation">Présentation</a></li>
+        <li><a href="jeux.html">Jeux joués</a></li>
+        <li>
+          <a href="contact.html">Contact</a>
+        </li>
+        <li><a href="statistique.html">Footer</a></li>
         <li>
           <a href="#" id="dark-toggle"><i class="bx bx-moon"></i></a>
         </li>
@@ -125,7 +116,7 @@
     </div>
 
     <!-- Section Présentation -->
-    <section class="presentation">
+    <section id="presentation">
       <h3>🎮 1. Esprit de l’événement</h3>
       <br />
       <p>
@@ -330,9 +321,13 @@
             target="_blank">
             <i class="bx bx-mail-send"></i>
           </a>
+          <a href="https://discord.gg/9SXfrCjCbu" target="_blank"
+            ><i class="bx bx-discordx"></i
+          ></a>
         </div>
       </div>
     </footer>
+    <script src="js/scriptDarkMode.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
